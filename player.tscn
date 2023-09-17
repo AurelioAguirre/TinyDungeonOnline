@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://byg4bx51kf3yn"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_714ot"]
+[ext_resource type="Texture2D" uid="uid://c76xad3w10sva" path="res://assets/player_sprite.png" id="1_bfxx8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8u5si"]
+size = Vector2(16, 15)
+
+[sub_resource type="SystemFont" id="SystemFont_kpmvf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ha7t"]
+font = SubResource("SystemFont_kpmvf")
+font_size = 12
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.352941)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gw770"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_714ot")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8u5si")
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_bfxx8")
+
+[node name="PlayerChat" type="Label" parent="."]
+offset_left = -164.0
+offset_top = -30.0
+offset_right = 165.0
+offset_bottom = -10.0
+label_settings = SubResource("LabelSettings_8ha7t")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gw770")
